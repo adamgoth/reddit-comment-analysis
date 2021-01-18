@@ -60,6 +60,7 @@ def get_replies(comment):
 print('enter the reddit post url (e.g. https://www.reddit.com/r/redditdev/comments/krolrb/multicomments/):')
 thread_url = input()
 
+# pass user's url to sanitize helper
 sanitized_thread_url = sanitize_input(thread_url)
 
 # make network call
@@ -76,7 +77,7 @@ if req_data.status_code == 200:
         children = item['data']['children']
         parse_children_for_comments(children)
 
-# deal with extra comment ids
+# handle extra comment ids
 for id in more_comment_ids:
     req_data = requests.get(create_thread_url(
         id), headers={'User-agent': 'adamgoth.com'})
